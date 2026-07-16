@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Outfit:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .primary-btn {
+        @apply bg-primary text-white font-bold py-2 px-5 rounded-xl
+        shadow-[0px_5px_12px_5px_#F59E0B]
+        hover:!scale-110 duration-300;
+    }
+}
+
+@layer utilies{
+    .drop-shadow{
+        filter: drop-shadow(-6px 8px 15px rgba(0, 0, 0, 0.2));
+    }
+}
