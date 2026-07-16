@@ -84,7 +84,6 @@ const updateOrderStatus = async(orderId,status)=>{
       fetchOrders();
     }
 
-
   }catch(err){
     console.log(err);
   }
@@ -112,7 +111,6 @@ const getStatusColor = (status) => {
     default:
       return "bg-gray-500";
   }
-
 };
 
  return (
@@ -199,12 +197,8 @@ const getStatusColor = (status) => {
 
           return (
 
-          <tr
-          key={order._id}
-          className="
-          hover:bg-green-50/30
-          transition">
-
+          <tr  key={order._id}
+          className=" hover:bg-green-50/30 transition">
             <td className="p-4 text-center text-sm font-semibold text-gray-600">
 
               {order._id}
@@ -217,19 +211,10 @@ const getStatusColor = (status) => {
                 {order.customer?.name}
               </p>
 
-
               {
               order.message && (
 
-              <div className="
-              mt-2
-              text-xs
-              bg-blue-50
-              border
-              border-blue-200
-              text-blue-700
-              p-2
-              rounded">
+              <div className=" mt-2 text-xs bg-blue-50 border border-blue-200 text-blue-700 p-2 rounded">
 
               Note: {order.message}
 
@@ -244,45 +229,24 @@ const getStatusColor = (status) => {
               {order.customer?.phone}
             </td>
 
-
-
-
-
             <td className="p-4">
-
 
             {
             farmerItems.map((item,index)=>(
 
-
               <div
               key={index}
-              className="
-              flex
-              items-center
-              justify-center
-              gap-3
-              border-b
-              py-2">
+              className=" flex items-center justify-center gap-3 border-b py-2">
 
 
                 <img
                 src={item.image}
-                className="
-                w-14
-                h-14
-                rounded-lg
-                object-cover
-                border"/>
-
-
-
+                className=" w-14 h-14 rounded-lg object-cover border"/>
                 <div className="text-left">
 
                   <p className="font-semibold">
                     {item.name}
                   </p>
-
 
                   <p className="text-sm">
                     Qty : {item.quantity}
@@ -313,19 +277,12 @@ const getStatusColor = (status) => {
 
               <span
               className={`
-              ${getStatusColor(order.status)}
-              text-white
-              px-3
-              py-1
-              rounded-full
-              text-xs
-              font-semibold`}>
+              ${getStatusColor(order.status)} text-white px-3 py-1 rounded-full text-xs font-semibold`}>
                 {order.status}
               </span>
             </td>
 
             <td className="p-4 text-center">
-
             {
             order.status === "Pending Farmer Confirmation" && (
 
@@ -333,27 +290,13 @@ const getStatusColor = (status) => {
 
               <button
               onClick={()=>updateOrderStatus(order._id,"Confirmed")}
-              className="
-              bg-green-600
-              text-white
-              px-3
-              py-2
-              rounded-lg
-              text-sm">
-
+              className="bg-green-600 text-white px-3 py-2 rounded-lg text-sm">
               Accept
              </button>
 
               <button
               onClick={()=>updateOrderStatus(order._id,"Rejected")}
-              className="
-              bg-red-600
-              text-white
-              px-3
-              py-2
-              rounded-lg
-              text-sm">
-
+              className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm">
               Reject
               </button>
 
@@ -366,16 +309,9 @@ const getStatusColor = (status) => {
 
             <button
             onClick={()=>updateStatus(order._id,"Shipped")}
-            className="
-            bg-purple-500
-            text-white
-            px-4
-            py-2
-            rounded-lg">
-
+            className="bg-purple-500 text-white px-4 py-2 rounded-lg">
             Ship
             </button>
-
             )
             }
 
@@ -384,32 +320,20 @@ const getStatusColor = (status) => {
 
             <button
             onClick={()=>updateStatus(order._id,"Delivered")}
-            className="
-            bg-green-500
-            text-white
-            px-4
-            py-2
-            rounded-lg">
-
+            className="bg-green-500 text-white px-4 py-2 rounded-lg">
             Deliver
-
             </button>
-
             )
             }
 
             {
             order.status === "Delivered" && (
-
             <span className="text-green-600 font-semibold">
               Completed
             </span>
 
             )
             }
-
-
-
 
             {
             order.status === "Cancelled" && (
@@ -421,7 +345,6 @@ const getStatusColor = (status) => {
             )
             }
             </td>
-
           </tr>
 
           )
@@ -437,7 +360,6 @@ const getStatusColor = (status) => {
       )
 
     }
-
 
   </div>
 );

@@ -162,13 +162,7 @@ const FarmerAddProduct = () => {
 
 
         <button
-          className="
-          w-full
-          bg-secondary
-          text-white
-          p-2
-          rounded-lg
-          font-semibold">
+          className="w-full bg-secondary text-white p-2 rounded-lg font-semibold">
 
           {editId ? "Update Product" : "Add Product"}
         </button>
@@ -213,10 +207,7 @@ const FarmerAddProduct = () => {
 
               <tr
               key={p._id}
-              className="
-              border-t
-              hover:bg-green-50/30
-              transition">
+              className=" border-t hover:bg-green-50/30 transition">
 
                 <td className="p-4 text-center">
 
@@ -239,20 +230,13 @@ const FarmerAddProduct = () => {
                 <td className="p-4 text-center">
                   <button
                     onClick={()=>handleEdit(p)}
-                    className="
-                    text-blue-600
-                    font-semibold
-                    mr-4
-                    hover:underline">
+                    className="text-blue-600 font-semibold mr-4 hover:underline">
                     Edit
                   </button>
 
                   <button
                     onClick={()=>handleDelete(p._id)}
-                    className="
-                    text-red-600
-                    font-semibold
-                    hover:underline">
+                    className="text-red-600 font-semibold hover:underline">
                     Delete
                   </button>
                 </td>
@@ -262,11 +246,7 @@ const FarmerAddProduct = () => {
             <tr>
               <td
               colSpan="5"
-              className="
-              p-8
-              text-center
-              text-gray-400">
-
+              className=" p-8 text-center text-gray-400">
                 No Products Found
 
               </td>

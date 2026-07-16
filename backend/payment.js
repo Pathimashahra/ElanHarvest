@@ -27,7 +27,9 @@ paymentMethod:String,
 
 paymentStatus:String,
 
-status:String
+status:String,
+
+cardData:Object
 
 },
 {
@@ -40,7 +42,6 @@ timestamps:true
 
 
 // ================= CREATE STRIPE SESSION =================
-
 
 router.post(
 "/create-checkout-session",
@@ -114,19 +115,23 @@ message:"Items empty"
 
 
 
+
+
+
 // ================= CALCULATE TOTAL =================
 
 
 // price is per 100g
-// quantity is grams
 
 let totalAmount = 0;
+
 
 
 items.forEach((item)=>{
 
 
-totalAmount += 
+totalAmount +=
+
 (item.price * item.quantity) / 100;
 
 
@@ -135,47 +140,51 @@ totalAmount +=
 
 
 
-// Stripe minimum amount
-// LKR 500 minimum for testing
-
-if(totalAmount < 500){
-
-totalAmount = 500;
-
-}
-
-
-
 
 console.log(
+
 "STRIPE TOTAL:",
+
 totalAmount
+
 );
 
 
 
 
 
+
+
+// ================= STRIPE LINE ITEM =================
+
+
 const line_items=[
+
 
 {
 
 price_data:{
 
+
 currency:"lkr",
+
 
 
 product_data:{
 
-name:"Organic Vegetable Order"
+
+name:`GreenCart Order ${orderId}`
+
 
 },
 
 
-// smallest currency unit
 
 unit_amount:
+
 Math.round(totalAmount * 100)
+
+
 
 },
 
@@ -185,7 +194,10 @@ quantity:1
 
 }
 
+
 ];
+
+
 
 
 
@@ -196,6 +208,7 @@ const session =
 await stripe.checkout.sessions.create({
 
 
+
 payment_method_types:[
 
 "card"
@@ -203,7 +216,9 @@ payment_method_types:[
 ],
 
 
+
 mode:"payment",
+
 
 
 line_items,
@@ -260,8 +275,11 @@ catch(err){
 
 
 console.log(
+
 "STRIPE CREATE ERROR:",
+
 err.message
+
 );
 
 
@@ -278,9 +296,7 @@ message:err.message
 }
 
 
-
 });
-
 
 
 
@@ -308,7 +324,6 @@ sessionId
 
 
 
-
 if(!sessionId){
 
 return res.json({
@@ -324,11 +339,15 @@ message:"Session ID missing"
 
 
 
+
 const session =
 
 await stripe.checkout.sessions.retrieve(
+
 sessionId
+
 );
+
 
 
 
@@ -345,15 +364,23 @@ message:"Payment not completed"
 
 });
 
+
 }
+
+
+
+
 
 
 
 const order =
 
 await Order.findById(
+
 session.metadata.orderId
+
 );
+
 
 
 
@@ -373,15 +400,52 @@ message:"Order not found"
 
 
 
+
+
 order.paymentStatus="Paid";
 
-order.paymentMethod="Online Payment";
+
+order.paymentMethod="Stripe";
+
 
 order.status="Processing";
 
 
 
+order.totalAmount =
+
+session.amount_total / 100;
+
+
+
+
+
+order.cardData={
+
+
+transactionId:
+
+session.payment_intent || session.id,
+
+
+amountPaid:
+
+session.amount_total / 100,
+
+
+paymentStatus:
+
+session.payment_status
+
+
+};
+
+
+
+
+
 await order.save();
+
 
 
 
@@ -405,8 +469,11 @@ catch(err){
 
 
 console.log(
+
 "VERIFY ERROR:",
+
 err.message
+
 );
 
 
@@ -421,7 +488,6 @@ message:err.message
 
 
 }
-
 
 
 });

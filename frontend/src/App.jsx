@@ -30,7 +30,6 @@ import CompleteOrder from "./components/Checkout/CompleteOrder";
 
 
 
-
 export const backendUrl = "http://localhost:4000";
 
 const App = () => {
@@ -51,7 +50,7 @@ const App = () => {
     location.pathname === "/adminfarmers"||
     location.pathname === "/adminusers"||
     location.pathname === "/adminlogin"||
-        location.pathname === "/adminorders";
+    location.pathname === "/adminorders";
 
   return (
     <>

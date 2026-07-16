@@ -136,16 +136,16 @@ function FarmerLogin() {
             className="w-full mt-3 p-3 border rounded-lg"/>
 
             <div className="flex justify-between text-sm text-gray-500 font-bold mt-3">
-  <p
-    onClick={() => {
-      setIsLogin(!isLogin);
-      clearForm();
-    }}
-    className="cursor-pointer text-secondary hover:underline"
-  >
-    {isLogin ? "Create Account" : "Login Here"}
-  </p>
-</div>
+              <p
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  clearForm();
+                }}
+                className="cursor-pointer text-secondary hover:underline"
+              >
+                {isLogin ? "Create Account" : "Login Here"}
+              </p>
+            </div>
           <div className="flex flex-col gap-3 mt-5">
             <button
               type="submit"
