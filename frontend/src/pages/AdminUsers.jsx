@@ -40,7 +40,7 @@ function AdminUsers() {
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-100">
             <thead>
-              <tr className="bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+              <tr className="bg-gray-50 text-left text-sm font-bold text-secondary uppercase tracking-wider">
                 <th className="p-4">User ID</th>
                 <th className="p-4">Name</th>
                 <th className="p-4">Phone</th>

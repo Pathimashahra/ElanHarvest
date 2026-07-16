@@ -44,7 +44,7 @@ const AdminProducts = () => {
         <table className="min-w-full divide-y divide-gray-100">
 
           <thead>
-            <tr className="bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+            <tr className="bg-gray-50 text-left text-sm font-bold text-secondary uppercase tracking-wider">
               <th className="p-4">Farmer</th>
               <th className="p-4">Image</th>
               <th className="p-4">Product</th>
@@ -59,14 +59,11 @@ const AdminProducts = () => {
             {products.length > 0 ? (
 
               products.map((p) => (
-
                 <tr
                   key={p._id}
-                  className="hover:bg-green-50/20 transition duration-150"
-                >
+                  className="hover:bg-green-50/20 transition duration-150">
 
                   <td className="p-4">
-
                     {p.farmerId?.name ? (
 
                       <div>
@@ -96,8 +93,7 @@ const AdminProducts = () => {
                     <img
                       src={p.image}
                       alt={p.name}
-                      className="w-14 h-14 rounded-xl object-cover border shadow-sm"
-                    />
+                      className="w-14 h-14 rounded-xl object-cover border shadow-sm"/>
 
                   </td>
 
@@ -130,7 +126,6 @@ const AdminProducts = () => {
                     </button>
 
                   </td>
-
                 </tr>
 
               ))
@@ -151,11 +146,8 @@ const AdminProducts = () => {
             )}
 
           </tbody>
-
         </table>
-
       </div>
-
     </div>
   );
 };
