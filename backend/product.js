@@ -1,20 +1,19 @@
 import express from "express";
 import mongoose from "mongoose";
-import fs from "fs";
 import multer from "multer";
-import path from "path";
-import { fileURLToPath } from "url";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "./config/cloudinary.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const uploadPath = path.join(__dirname, "uploads");
-
-if (!fs.existsSync(uploadPath)) {
-  fs.mkdirSync(uploadPath, { recursive: true });
-}
 const router = express.Router();
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params:{
+    folder:"elan-harvest-products",
+    allowed_formats:["jpg","png","jpeg"]
+  }
+});
 
+const upload = multer({storage});
 const productSchema = new mongoose.Schema(
   {
     _id: String,
