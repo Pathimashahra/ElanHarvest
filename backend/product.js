@@ -55,19 +55,7 @@ const Product =
   mongoose.models.Product ||
   mongoose.model("Product", productSchema);
 
-const storage = multer.diskStorage({
-  destination: uploadPath,
-  filename:(req,file,cb)=>{
-    cb(
-      null,
-      Date.now()+"-"+file.originalname
-    );
-  }
-});
 
-const upload = multer({
-  storage
-});
 
 router.post("/", upload.single("image"), async(req,res)=>{
   try{
@@ -89,8 +77,7 @@ router.post("/", upload.single("image"), async(req,res)=>{
         price,
         category,
         farmerId,
-        image:
-        `/uploads/${req.file.filename}`
+        image:req.file.path
       });
 
     res.json({
@@ -140,8 +127,7 @@ router.put("/:id", upload.single("image"), async(req,res)=>{
     };
 
     if(req.file){
-     updateData.image =
-     `/uploads/${req.file.filename}`;
+     updateData.image = req.file.path;
     }
 
     const updated =
