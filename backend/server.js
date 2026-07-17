@@ -26,7 +26,7 @@ console.log(
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/products",productRoutes);
+app.use("/api/products", productRoutes);
 app.use("/api/users",userRoutes);
 app.use("/api/cart",cartRoutes);
 app.use("/api/orders",orderRoutes);
@@ -43,5 +43,4 @@ if(process.env.NODE_ENV !== "production"){
     console.log(`Server running on ${port}`);
   });
 }
-
 export default app;
