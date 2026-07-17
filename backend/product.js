@@ -13,7 +13,9 @@ const storage = new CloudinaryStorage({
   }
 });
 
-const upload = multer({storage});
+const upload = multer({
+  storage
+});
 const productSchema = new mongoose.Schema(
   {
     _id: String,
