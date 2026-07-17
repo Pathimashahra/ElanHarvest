@@ -1,7 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
+import fs from "fs";
 import multer from "multer";
 
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 const router = express.Router();
 
 const productSchema = new mongoose.Schema(
@@ -80,7 +84,7 @@ router.post("/", upload.single("image"), async(req,res)=>{
         category,
         farmerId,
         image:
-        `http://localhost:4000/uploads/${req.file.filename}`
+        `/uploads/${req.file.filename}`
       });
 
     res.json({
@@ -130,8 +134,8 @@ router.put("/:id", upload.single("image"), async(req,res)=>{
     };
 
     if(req.file){
-      updateData.image =
-      `http://localhost:4000/uploads/${req.file.filename}`;
+     updateData.image =
+     `/uploads/${req.file.filename}`;
     }
 
     const updated =
