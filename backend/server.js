@@ -14,6 +14,7 @@ import paymentRoutes from "./payment.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
+console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY);
 export const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY
 );
