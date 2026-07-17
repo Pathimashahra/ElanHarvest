@@ -24,7 +24,13 @@ console.log(
   process.env.STRIPE_SECRET_KEY
 );
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://elan-harvest-system.vercel.app",
+    "http://localhost:5173"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use("/api/products", productRoutes);
 app.use("/api/users",userRoutes);
