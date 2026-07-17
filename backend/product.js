@@ -5,17 +5,20 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 import cloudinary from "./config/cloudinary.js";
 
 const router = express.Router();
+
 const storage = new CloudinaryStorage({
-  cloudinary,
+  cloudinary: cloudinary,
   params:{
     folder:"elan-harvest-products",
-    allowed_formats:["jpg","png","jpeg"]
+    allowed_formats:["jpg","png","jpeg","webp"]
   }
 });
 
 const upload = multer({
-  storage
+  storage: storage
 });
+
+
 const productSchema = new mongoose.Schema(
   {
     _id: String,
