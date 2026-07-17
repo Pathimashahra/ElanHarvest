@@ -299,8 +299,6 @@ router.put("/status/:id", async (req, res) => {
       `Dear ${farmer.name},
       Your farmer account has been approved by the Administrator.
       You can now login and manage your products.
-      Login URL:
-      ${process.env.CLIENT_URL}/farmerlogin
       
       Registered Email:
       ${farmer.email}
@@ -311,7 +309,6 @@ router.put("/status/:id", async (req, res) => {
 
       subject =
       "Farmer Account Rejected - Organic Fruits & Vegetables Ordering System";
-
 
       text =
       `Dear ${farmer.name},

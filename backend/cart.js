@@ -14,15 +14,11 @@ const cartItemSchema = new mongoose.Schema({
 
 
 const cartSchema = new mongoose.Schema({
-
-  _id: String,
-
+   _id: String,
   userId: String,
-
   items: [
     cartItemSchema
   ]
-
 },
 {
   timestamps:true
@@ -30,19 +26,12 @@ const cartSchema = new mongoose.Schema({
 
 
 cartSchema.pre("save", async function () {
-
   if (this.isNew && !this._id) {
-
     const Cart = mongoose.models.Cart;
-
     const carts = await Cart.find({}, "_id");
-
     let maxNum = 0;
-
     carts.forEach((cart)=>{
-
       if(cart._id?.startsWith("ca")){
-
         const num = parseInt(
           cart._id.substring(2)
         );
@@ -51,9 +40,7 @@ cartSchema.pre("save", async function () {
           maxNum = num;
         }
       }
-
     });
-
 
     this._id =
       `ca${String(maxNum + 1).padStart(4,"0")}`;
@@ -71,12 +58,10 @@ mongoose.model(
 
 
 cartRouter.get("/:userId", async(req,res)=>{
-
-try{
-
-const cart =
-await Cart.findOne({
-  userId:req.params.userId
+  try{
+    const cart =
+    await Cart.findOne({
+      userId:req.params.userId
 });
 
 
@@ -91,19 +76,15 @@ res.status(500).json({
  success:false,
  message:error.message
 });
-
 }
-
 });
 
 
 cartRouter.post("/add", async(req,res)=>{
-
-try{
-
-const {
- userId,
- product
+  try{
+    const {
+      userId,
+      product
 }=req.body;
 
 
@@ -112,17 +93,11 @@ await Cart.findOne({
  userId
 });
 
-
 if(!cart){
-
  cart = new Cart({
-
   userId,
-
   items:[]
-
  });
-
 }
 
 if (cart.items.length > 0) {
@@ -137,45 +112,29 @@ if (cart.items.length > 0) {
 
 
 cart.items.push(product);
-
-
 await cart.save();
-
-
 res.json({
-
-success:true,
-
-cart
-
+  success:true,
+  cart
 });
-
 
 }catch(error){
-
-res.status(500).json({
-
-success:false,
-
-message:error.message
-
-});
-
+  res.status(500).json({
+    success:false,
+    message:error.message
+  });
 }
 
 });
 
 
 cartRouter.put("/update",async(req,res)=>{
-
-try{
-
-const {
-userId,
-productId,
-quantity
-}=req.body;
-
+  try{
+    const {
+      userId,
+      productId,
+      quantity
+    }=req.body;
 
 const cart =
 await Cart.findOne({
@@ -187,49 +146,31 @@ cart.items =
 cart.items.map((item)=>
 
 item.productId === productId ?
-
 {
 ...item._doc,
 quantity
 }
-
 :
 item
-
 );
 
-
 await cart.save();
-
-
 res.json(cart);
-
-
 }catch(error){
-
-res.status(500).json({
-
-success:false,
-
-message:error.message
-
-});
-
+  res.status(500).json({
+    success:false,
+    message:error.message
+  });
 }
 
 });
 
-
-// Remove Item
 cartRouter.delete("/remove",async(req,res)=>{
-
-try{
-
-const {
-userId,
-productId
-}=req.body;
-
+  try{
+    const {
+      userId,
+      productId
+    }=req.body;
 
 const cart =
 await Cart.findOne({
@@ -243,62 +184,38 @@ cart.items.filter(
 item.productId !== productId
 );
 
-
 await cart.save();
-
-
 res.json(cart);
-
-
 }catch(error){
-
-res.status(500).json({
-
-success:false,
-
-message:error.message
-
+  res.status(500).json({
+    success:false,
+    message:error.message
 });
 
 }
 
 });
 
-
-// Clear Cart
 cartRouter.delete("/clear",async(req,res)=>{
-
-try{
-
-const {
-userId
-}=req.body;
-
+  try{
+    const {
+      userId
+    }=req.body;
 
 await Cart.findOneAndDelete({
 userId
 });
 
-
 res.json({
-
-success:true,
-
-message:"Cart cleared successfully"
-
+  success:true,
+  message:"Cart cleared successfully"
 });
-
 
 }catch(error){
-
-res.status(500).json({
-
-success:false,
-
-message:error.message
-
-});
-
+  res.status(500).json({
+    success:false,
+    message:error.message
+  });
 }
 
 });

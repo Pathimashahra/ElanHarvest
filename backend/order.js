@@ -254,52 +254,28 @@ res.json({
 
 router.post("/confirm-payment",async(req,res)=>{
     try{
-
         const {orderId}=req.body;
-
-
         const order = await Order.findById(orderId);
-
-
         if(!order){
-
             return res.json({
                 success:false,
                 message:"Order not found"
             });
-
         }
 
-
         order.paymentStatus="Paid";
-
         order.status="Processing";
-
-
         await order.save();
-
-
         res.json({
-
             success:true,
-
             message:"Payment confirmed successfully",
-
             order
-
         });
-
-
     }catch(err){
-
         res.json({
-
             success:false,
-
             message:err.message
-
         });
-
     }
 });
 router.get("/:id",async(req,res)=>{
@@ -307,25 +283,18 @@ router.get("/:id",async(req,res)=>{
 const order=await Order.findById(req.params.id);
 
 res.json({
-success:true,
-order
+    success:true,
+    order
 });
 
 });
 router.put("/complete/:id",
 async(req,res)=>{
-
-
-try{
-
-
-const {
-customer,
-paymentMethod
-
-}=req.body;
-
-
+    try{
+        const {
+            customer,
+            paymentMethod
+        } = req.body;
 
 
 const order =
@@ -336,85 +305,44 @@ req.params.id
 
 
 if(!order){
-
-return res.json({
-
-success:false,
-
-message:"Order not found"
-
+    return res.json({
+        success:false,
+        message:"Order not found"
 });
 
 }
-
-
-
 order.customer = customer;
-
-
 order.paymentMethod =
 paymentMethod;
 
-
-
 if(paymentMethod==="COD"){
-
-
-order.status="Processing";
-
-order.paymentStatus="Pending";
-
-const itemsPrice = order.items.reduce((sum, item) => sum + (item.price * item.quantity) / 100, 0);
-order.totalAmount = itemsPrice + 250;
-
-
+    order.status="Processing";
+    order.paymentStatus="Pending";
+    const itemsPrice = order.items.reduce((sum, item) => sum + (item.price * item.quantity) / 100, 0);
+    order.totalAmount = itemsPrice + 250;
 }
-
 else{
-
-order.status="Confirmed";
-
-order.paymentStatus="Pending";
-
-order.paymentMethod="Online Payment";
-
-const itemsPrice = order.items.reduce((sum, item) => sum + (item.price * item.quantity) / 100, 0);
-order.totalAmount = itemsPrice;
-
+    order.status="Confirmed";
+    order.paymentStatus="Pending";
+    order.paymentMethod="Online Payment";
+    const itemsPrice = order.items.reduce((sum, item) => sum + (item.price * item.quantity) / 100, 0);
+    order.totalAmount = itemsPrice;
 }
-
-
 
 await order.save();
-
-
-
 res.json({
-
-success:true,
-
-order
-
+    success:true,
+    order
 });
-
-
 
 }
 
 catch(err){
-
-
-res.status(500).json({
-
-success:false,
-
-message:err.message
-
-});
-
-
+    res.status(500).json({
+        success:false,
+        message:err.message
+    });
 }
-
 
 });
 export default router;

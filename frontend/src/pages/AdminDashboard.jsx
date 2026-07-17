@@ -220,22 +220,22 @@ const AdminDashboard = () => {
                 <CircleStat
                   value={farmers.length}
                   label="Farmers"
-                  color="#22c55e"/>
+                  color="#15803d"/>
 
                 <CircleStat
                   value={users.length}
                   label="Users"
-                  color="#3b82f6"/>
+                  color="#1d4ed8"/>
 
                 <CircleStat
                   value={products.length}
                   label="Products"
-                  color="#ef4444"/>
+                  color="#b91c1c"/>
 
                   <CircleStat
                   value={orders.length}
                   label="Orders"
-                  color="#f97316"/>
+                  color="#c2410c"/>
 
               </div>
             </>

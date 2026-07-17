@@ -71,14 +71,14 @@ const AdminProducts = () => {
                           {p.farmerId.name}
                         </div>
 
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-gray-600">
                           ID : {p.farmerId._id}
                         </div>
                       </div>
 
                     ) : (
 
-                      <div className="font-semibold text-gray-600">
+                      <div className="font-semibold text-gray-700">
                         {typeof p.farmerId === "string"
                           ? p.farmerId
                           : "No Farmer"}
@@ -102,14 +102,14 @@ const AdminProducts = () => {
                   </td>
 
                   <td className="p-4">
-                    <span className="font-bold text-green-600">
+                    <span className="font-bold text-secondary">
                       Rs. {p.price}
                     </span>
                   </td>
 
                   <td className="p-4">
 
-                    <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                    <span className="px-3 py-1 rounded-full bg-green-100 text-secondary text-xs font-semibold">
                       {p.category}
                     </span>
 
@@ -119,7 +119,7 @@ const AdminProducts = () => {
 
                     <button
                       onClick={() => handleDelete(p._id)}
-                      className="mx-auto bg-red-50 hover:bg-red-100 text-red-600 font-semibold px-3 py-1.5 rounded-lg border border-red-200 hover:border-red-300 transition duration-150 flex items-center justify-center gap-2 text-xs"
+                      className="mx-auto bg-red-50 hover:bg-red-100 text-red-700 font-semibold px-3 py-1.5 rounded-lg border border-red-200 hover:border-red-300 transition duration-150 flex items-center justify-center gap-2 text-xs"
                     >
                       <FaTrash />
                       Delete

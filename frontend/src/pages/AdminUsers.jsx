@@ -53,15 +53,15 @@ function AdminUsers() {
               {users.length > 0 ? (
                 users.map((u) => (
                   <tr key={u._id} className="hover:bg-green-50/20 transition duration-150">
-                    <td className="p-4 text-sm font-semibold text-gray-500">{u._id}</td>
+                    <td className="p-4 text-sm font-semibold text-gray-600">{u._id}</td>
                     <td className="p-4 text-sm font-bold text-gray-800">{u.name}</td>
-                    <td className="p-4 text-sm text-gray-600">{u.phone}</td>
-                    <td className="p-4 text-sm text-gray-600">{u.address}</td>
-                    <td className="p-4 text-sm text-gray-600">{u.email}</td>
+                    <td className="p-4 text-sm text-gray-700">{u.phone}</td>
+                    <td className="p-4 text-sm text-gray-700">{u.address}</td>
+                    <td className="p-4 text-sm text-gray-700">{u.email}</td>
                     <td className="p-4 text-center">
                       <button
                         onClick={() => handleDelete(u._id)}
-                        className="mx-auto bg-red-50 hover:bg-red-100 text-red-600 font-semibold px-3 py-1.5 rounded-lg border border-red-200 hover:border-red-300 transition duration-150 flex items-center justify-center gap-1.5 text-xs"
+                        className="mx-auto bg-red-50 hover:bg-red-100 text-red-700 font-semibold px-3 py-1.5 rounded-lg border border-red-200 hover:border-red-300 transition duration-150 flex items-center justify-center gap-1.5 text-xs"
                       >
                         <FaTrash /> Delete
                       </button>

@@ -78,9 +78,7 @@ const App = () => {
         <Route path="/adminfarmers" element={<AdminFarmers />}/>
         <Route path="/adminusers" element={<AdminUsers />}/>
         <Route path="/adminlogin" element={<AdminLogin />}/>
-                <Route path="/adminorders" element={<AdminOrders />}/>
-
-
+        <Route path="/adminorders" element={<AdminOrders />}/>
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
         <Route path="/completeorder/:id" element={<CompleteOrder />}/>

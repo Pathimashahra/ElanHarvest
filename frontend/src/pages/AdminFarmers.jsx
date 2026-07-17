@@ -96,7 +96,7 @@ function AdminFarmers() {
 
           <thead>
 
-            <tr className="bg-gray-50 text-left text-sm font-bold uppercase">
+            <tr className="bg-gray-50 text-left text-sm text-secondary font-bold uppercase">
               <th className="p-4">Farmer ID</th>
               <th className="p-4">Name</th>
               <th className="p-4">Phone</th>
@@ -142,12 +142,12 @@ function AdminFarmers() {
                 <span
                 className={
                   f.status==="Approved"
-                  ? "text-green-600"
+                  ? "text-green-700"
                   :
                   f.status==="Rejected"
-                  ? "text-red-600"
+                  ? "text-red-700"
                   :
-                  "text-yellow-600"
+                  "text-yellow-700"
                 }
                 >
                   {f.status}
@@ -158,22 +158,21 @@ function AdminFarmers() {
 
                 {
                 f.status==="Pending" && (
-  <>
-  <button
-  onClick={()=>updateFarmerStatus(f,"Approved")}
-    className="bg-green-50 text-green-600 px-3 py-1 rounded-lg mr-2 border border-green-200">
-      Approve
-    </button>
-
-    <button
-    onClick={()=>updateFarmerStatus(f,"Rejected")}
-    className="bg-red-50 text-red-600 px-3 py-1 rounded-lg mr-2 border border-red-200">
-      Reject
-    </button>
-
-  </>
-)
-}
+                <>
+                <button
+                onClick={()=>updateFarmerStatus(f,"Approved")}
+                className="bg-green-50 text-green-700 px-3 py-1 rounded-lg mr-2 border border-green-200">
+                  Approve
+                  </button>
+                  
+                  <button
+                  onClick={()=>updateFarmerStatus(f,"Rejected")}
+                  className="bg-red-50 text-red-600 px-3 py-1 rounded-lg mr-2 border border-red-200">
+                    Reject
+                    </button>
+                    </>
+                  )
+                  }
                 <button
                 onClick={()=>handleDelete(f._id)}
                 className="bg-red-50 text-red-600 px-3 py-1 rounded-lg border border-red-200">
