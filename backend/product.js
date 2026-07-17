@@ -2,9 +2,16 @@ import express from "express";
 import mongoose from "mongoose";
 import fs from "fs";
 import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
 
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const uploadPath = path.join(__dirname, "uploads");
+
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
 }
 const router = express.Router();
 
@@ -50,7 +57,7 @@ const Product =
   mongoose.model("Product", productSchema);
 
 const storage = multer.diskStorage({
-  destination:"uploads/",
+  destination: uploadPath,
   filename:(req,file,cb)=>{
     cb(
       null,
