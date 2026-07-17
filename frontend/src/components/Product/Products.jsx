@@ -22,7 +22,9 @@ const Products = () => {
 
 const fetchProducts = async () => {
   try {
-    const res = await axios.get("http://localhost:4000/api/products");
+    const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/products`
+);
 
     console.log("API RESPONSE:", res.data);
 
@@ -120,7 +122,6 @@ const fetchProducts = async () => {
 
                 <p className="text-sm text-primary">{p.category}</p>
 
-                {/* Farmer Name */}
                 <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-500">
                   <span className="bg-green-50 text-green-700 font-medium px-2 py-0.5 rounded-full border border-green-200 flex items-center gap-1">
                     <FaUser className="text-[10px]" /> {p.farmerId?.name || "Organic Farmer"}
@@ -163,7 +164,6 @@ const fetchProducts = async () => {
               {selectedProduct.name}
             </h2>
 
-            {/* Farmer Name */}
             <div className="text-sm mb-4 flex items-center gap-1.5 bg-green-50 p-2.5 rounded-xl border border-green-100">
               <span className="font-semibold text-secondary flex items-center gap-1">
                 <FaUser className="text-xs text-primary" /> Farmer:
