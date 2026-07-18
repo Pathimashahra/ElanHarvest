@@ -16,17 +16,11 @@ const app = express();
 
 app.use(
   cors({
-    origin:[
+    origin: [
       "https://elan-harvest-system.vercel.app",
       "http://localhost:5173"
     ],
-    methods:[
-      "GET",
-      "POST",
-      "PUT",
-      "DELETE"
-    ],
-    credentials:true
+    credentials: true
   })
 );
 
@@ -64,5 +58,14 @@ if (process.env.NODE_ENV !== "production") {
     );
   });
 }
+app.use((err,req,res,next)=>{
 
+ console.log("GLOBAL ERROR:",err);
+
+ res.status(500).json({
+   success:false,
+   message:err.message
+ });
+
+});
 export default app;
