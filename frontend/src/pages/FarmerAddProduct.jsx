@@ -12,11 +12,7 @@ const FarmerAddProduct = () => {
     price: "",
     category: "",
   });
-console.log("FORM DATA");
 
-for (let pair of formData.entries()) {
-  console.log(pair[0], pair[1]);
-}
   const [image, setImage] = useState(null);
 
   const farmer = JSON.parse(localStorage.getItem("farmer"));
@@ -57,7 +53,11 @@ for (let pair of formData.entries()) {
   formData.append("farmerId", farmerId);
 
   if (image) formData.append("image", image);
+  console.log("FORM DATA");
 
+for (const pair of formData.entries()) {
+  console.log(pair[0], pair[1]);
+}
   try {
     if (editId) {
       await axios.put(
