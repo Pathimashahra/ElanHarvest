@@ -6,6 +6,8 @@ import { FaUser } from "react-icons/fa";
 import { backendUrl } from "../../App";
 
 const Products = () => {
+  console.log("PRODUCT COMPONENT LOADED");
+
   const [products, setProducts] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
