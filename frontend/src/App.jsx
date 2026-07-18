@@ -30,7 +30,7 @@ import CompleteOrder from "./components/Checkout/CompleteOrder";
 
 
 
-export const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+export const backendUrl = import.meta.env.VITE_API_URL;
 const App = () => {
 
   const [token, setToken] = useState(
