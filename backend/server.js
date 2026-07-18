@@ -26,7 +26,11 @@ app.use(
 
 
 app.use(express.json());
-
+app.use(
+ express.urlencoded({
+  extended:true
+ })
+);
 const port = process.env.PORT || 4000;
 console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY);
 export const stripe = new Stripe(

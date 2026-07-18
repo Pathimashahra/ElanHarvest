@@ -58,24 +58,14 @@ const FarmerAddProduct = () => {
     if (editId) {
       await axios.put(
         `${backendUrl}/api/products/${editId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData
       );
 
       alert("Product Updated Successfully");
     } else {
       await axios.post(
         `${backendUrl}/api/products`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData
       );
 
       alert("Product Added Successfully");

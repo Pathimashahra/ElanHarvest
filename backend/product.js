@@ -15,8 +15,12 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const upload = multer({ storage });
-
+const upload = multer({
+ storage,
+ limits:{
+  fileSize:5 * 1024 * 1024
+ }
+});
 
 const productSchema = new mongoose.Schema(
   {
@@ -75,8 +79,10 @@ const Product =
   mongoose.model("Product", productSchema);
 
 
-
-router.post("/", async(req,res)=>{
+router.post(
+  "/",
+  upload.single("image"),
+  async(req,res)=>{
       console.log("PRODUCT BODY:",req.body);
     console.log("PRODUCT FILE:",req.file);
     try{
@@ -124,31 +130,52 @@ router.post("/", async(req,res)=>{
 );
 
 
-router.get("/",async(req,res)=>{
-    try{
-      const products =
-        await Product.find()
-        .populate("farmerId");
+router.post(
+  "/",
+  upload.single("image"),
+  async(req,res)=>{
 
-      res.json({
-        success:true,
-        products
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
+    try {
+
+      const {
+        name,
+        price,
+        category,
+        farmerId
+      } = req.body;
+
+      if(!req.file){
+        return res.status(400).json({
+          success:false,
+          message:"Image missing"
+        });
+      }
+
+
+      const product = await Product.create({
+        name,
+        price:Number(price),
+        category,
+        farmerId,
+        image:req.file.path
       });
 
-    }catch(err){
+      res.status(201).json({
+        success:true,
+        product
+      });
 
-      console.log(
-        "GET PRODUCT ERROR:",
-        err
-      );
-
+    } catch(err){
+      console.log("PRODUCT ERROR:",err);
       res.status(500).json({
         success:false,
         message:err.message
       });
     }
-  }
-);
+});
 
 router.get("/farmer/:id",async(req,res)=>{
     try{
