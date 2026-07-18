@@ -1,6 +1,7 @@
 import axios from "axios";
+import { backendUrl } from "../App";
 
-const BASE_URL = "/api/products";
+const BASE_URL = `${backendUrl}/api/products`;
 
 export const getProducts = () => axios.get(BASE_URL);
 
