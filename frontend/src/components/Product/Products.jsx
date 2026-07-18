@@ -27,6 +27,11 @@ const fetchProducts = async () => {
   try {
     const res = await axios.get(`${backendUrl}/api/products`);
 
+console.log("STATUS", res.status);
+console.log("DATA", res.data);
+
+setProducts(res.data.products || []);
+
 
     console.log("API RESPONSE:", res.data);
 
