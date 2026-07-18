@@ -13,6 +13,26 @@ import paymentRoutes from "./payment.js";
 
 
 const app = express();
+
+app.use(
+  cors({
+    origin:[
+      "https://elan-harvest-system.vercel.app",
+      "http://localhost:5173"
+    ],
+    methods:[
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE"
+    ],
+    credentials:true
+  })
+);
+
+
+app.use(express.json());
+
 const port = process.env.PORT || 4000;
 console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY);
 export const stripe = new Stripe(
@@ -24,14 +44,6 @@ console.log(
   process.env.STRIPE_SECRET_KEY
 );
 
-
-app.use(cors({
-  origin:[
-    "https://elan-harvest-system.vercel.app",
-    "http://localhost:5173"
-  ],
-  credentials:true
-}));
 app.use(express.json());
 app.use("/api/products", productRoutes);
 app.use("/api/users",userRoutes);
