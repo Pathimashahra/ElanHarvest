@@ -31,6 +31,8 @@ import CompleteOrder from "./components/Checkout/CompleteOrder";
 
 
 export const backendUrl = import.meta.env.VITE_API_URL;
+
+console.log("BACKEND URL:", backendUrl);
 const App = () => {
 
   const [token, setToken] = useState(
