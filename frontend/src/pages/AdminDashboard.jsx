@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../App";
 
 import AdminFarmers from "./AdminFarmers";
 import AdminUsers from "./AdminUsers";
@@ -31,7 +32,7 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const backendUrl = "http://localhost:4000";
+      // Use imported backendUrl
 
       const userRes = await axios.get(`${backendUrl}/api/users`);
       const farmerRes = await axios.get(`${backendUrl}/api/farmers`);

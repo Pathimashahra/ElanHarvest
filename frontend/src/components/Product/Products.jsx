@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { addToCart } from "../../api/cartApi";
 import { FaUser } from "react-icons/fa";
+import { backendUrl } from "../../App";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -22,12 +23,12 @@ const Products = () => {
 
 const fetchProducts = async () => {
   try {
-    const res = await axios.get("/api/products");
+    const res = await axios.get(`${backendUrl}/api/products`);
 
 
     console.log("API RESPONSE:", res.data);
 
-    setProducts(res.data.products);
+    setProducts(res.data.products || res.data || []);
   } catch (err) {
     console.log(err);
   }

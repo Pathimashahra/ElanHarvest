@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaBoxOpen, FaTrash } from "react-icons/fa";
+import { backendUrl } from "../App";
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/products");
+      const res = await axios.get(`${backendUrl}/api/products`);
       setProducts(res.data.products || []);
     } catch (err) {
       console.log(err);
@@ -21,7 +22,7 @@ const AdminProducts = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        await axios.delete(`http://localhost:4000/api/products/${id}`);
+        await axios.delete(`${backendUrl}/api/products/${id}`);
         fetchProducts();
       } catch (err) {
         console.log(err);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaTrash, FaUserTie } from "react-icons/fa";
+import { backendUrl } from "../App";
 
 function AdminFarmers() {
 
@@ -9,7 +10,7 @@ function AdminFarmers() {
   const fetchFarmers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:4000/api/farmers"
+        `${backendUrl}/api/farmers`
       );
 
       setFarmers(res.data.farmers || []);
@@ -23,7 +24,7 @@ function AdminFarmers() {
   try {
 
     const response = await axios.put(
-      `http://localhost:4000/api/farmers/status/${farmer._id}`,
+      `${backendUrl}/api/farmers/status/${farmer._id}`,
       {
         status: status
       }
@@ -62,7 +63,7 @@ function AdminFarmers() {
     if(window.confirm("Are you sure you want to delete this farmer?")){
       try{
         await axios.delete(
-          `http://localhost:4000/api/farmers/${id}`
+          `${backendUrl}/api/farmers/${id}`
         );
         fetchFarmers();
       }

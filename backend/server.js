@@ -44,9 +44,12 @@ app.get("/",(req,res)=>{
 });
 
 
-if(process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV !== "production") {
   app.listen(port,()=>{
-    console.log(`Server running on ${port}`);
+    console.log(
+      `Server Started on Port: ${port}`
+    );
   });
 }
+
 export default app;

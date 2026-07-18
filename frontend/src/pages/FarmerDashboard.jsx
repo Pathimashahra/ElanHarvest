@@ -3,6 +3,7 @@ import axios from "axios";
 import FarmerAddProduct from "./FarmerAddProduct";
 import { useNavigate } from "react-router-dom";
 import FarmerOrders from "./FarmerOrders";
+import { backendUrl } from "../App";
 
 import {
   FaHome,
@@ -29,7 +30,7 @@ const FarmerDashboard = () => {
       if (!farmerId) return;
 
       const res = await axios.get(
-        `http://localhost:4000/api/products/farmer/${farmerId}`
+        `${backendUrl}/api/products/farmer/${farmerId}`
       );
 
       setTotalProducts(res.data.products.length);
@@ -43,7 +44,7 @@ const FarmerDashboard = () => {
       if (!farmerId) return;
 
       const res = await axios.get(
-        `http://localhost:4000/api/orders/farmer/${farmerId}`
+        `${backendUrl}/api/orders/farmer/${farmerId}`
       );
 
       setTotalOrders(res.data.orders.length);

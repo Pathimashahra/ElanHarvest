@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaClipboardList, FaFileAlt } from "react-icons/fa";
+import { backendUrl } from "../App";
 
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
   
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/orders");
+      const res = await axios.get(`${backendUrl}/api/orders`);
       setOrders(res.data.orders || []);
     } catch (err) {
       console.log(err);

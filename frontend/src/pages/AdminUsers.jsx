@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaTrash, FaUsers } from "react-icons/fa";
+import { backendUrl } from "../App";
 
 function AdminUsers() {
     const [users, setUsers] = useState([]);
         
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/users");
+        const res = await axios.get(`${backendUrl}/api/users`);
         setUsers(res.data.users || []);
       } catch (err) {
         console.log(err);
@@ -21,7 +22,7 @@ function AdminUsers() {
     const handleDelete = async (id) => {
       if (window.confirm("Are you sure you want to delete this customer?")) {
         try {
-          await axios.delete(`http://localhost:4000/api/users/${id}`);
+          await axios.delete(`${backendUrl}/api/users/${id}`);
           fetchUsers();
         } catch (err) {
           console.log(err);

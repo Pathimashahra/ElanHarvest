@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const backendUrl = "http://localhost:4000";
+import { backendUrl } from "../App";
 
 function FarmerOrders() {
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { backendUrl } from "../App";
 
 const FarmerAddProduct = () => {
   const [showForm, setShowForm] = useState(false);
@@ -20,7 +21,7 @@ const FarmerAddProduct = () => {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:4000/api/products/farmer/${farmerId}`
+        `${backendUrl}/api/products/farmer/${farmerId}`
       );
       setProducts(res.data.products || []);
     } catch (err) {
@@ -56,7 +57,7 @@ const FarmerAddProduct = () => {
   try {
     if (editId) {
       await axios.put(
-        `http://localhost:4000/api/products/${editId}`,
+        `${backendUrl}/api/products/${editId}`,
         formData,
         {
           headers: {
@@ -68,7 +69,7 @@ const FarmerAddProduct = () => {
       alert("Product Updated Successfully");
     } else {
       await axios.post(
-        "http://localhost:4000/api/products",
+        `${backendUrl}/api/products`,
         formData,
         {
           headers: {
@@ -101,7 +102,7 @@ const FarmerAddProduct = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/products/${id}`);
+      await axios.delete(`${backendUrl}/api/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.log(err);

@@ -22,14 +22,25 @@ const Navbar = ({ token, setToken, user }) => {
   const userId = localUser?._id;
 
   const fetchCartCount = async () => {
-    try {
-      if (!userId) return;
-      const res = await getCart(userId);
-      setCartCount(res.data.items.length);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  try {
+    if (!userId) return;
+
+    const res = await getCart(userId);
+
+    console.log("CART RESPONSE:", res.data);
+
+    const items =
+      res.data.items ||
+      res.data.cart?.items ||
+      [];
+
+    setCartCount(items.length);
+
+  } catch (err) {
+    console.log(err);
+    setCartCount(0);
+  }
+};
 
   React.useEffect(() => {
     fetchCartCount();

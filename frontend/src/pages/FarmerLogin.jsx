@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../App";
 
 function FarmerLogin() {
   const [isLogin, setIsLogin] = useState(true);
@@ -28,7 +29,7 @@ function FarmerLogin() {
     try {
       if (isLogin) {
         const res = await axios.post(
-          "http://localhost:4000/api/farmers/login",
+          `${backendUrl}/api/farmers/login`,
           {
             email: formData.email,
             password: formData.password,
@@ -50,7 +51,7 @@ function FarmerLogin() {
         }
       } else {
         const res = await axios.post(
-          "http://localhost:4000/api/farmers/register",
+          `${backendUrl}/api/farmers/register`,
           formData
         );
 
