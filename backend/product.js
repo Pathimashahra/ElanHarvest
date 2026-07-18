@@ -128,7 +128,9 @@ router.post(
     }
   }
 );
-
+router.get("/test", (req, res) => {
+  res.send("PRODUCT ROUTE WORKING");
+});
 
 router.post(
   "/",
