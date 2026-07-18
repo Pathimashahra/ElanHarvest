@@ -76,8 +76,8 @@ const Product =
 
 
 
-router.post("/",upload.single("image"),async(req,res)=>{
-    console.log("PRODUCT BODY:",req.body);
+router.post("/", async(req,res)=>{
+      console.log("PRODUCT BODY:",req.body);
     console.log("PRODUCT FILE:",req.file);
     try{
       const {
