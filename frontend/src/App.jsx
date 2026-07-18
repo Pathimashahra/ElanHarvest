@@ -29,8 +29,8 @@ import Success from "./components/Checkout/Success";
 import CompleteOrder from "./components/Checkout/CompleteOrder";
 
 
-
-export const backendUrl = import.meta.env.VITE_API_URL;
+export const backendUrl =
+  import.meta.env.VITE_API_URL || "https://elan-harvest.vercel.app";
 
 console.log("BACKEND URL:", backendUrl);
 const App = () => {

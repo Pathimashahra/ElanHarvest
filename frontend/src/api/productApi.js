@@ -3,7 +3,9 @@ import { backendUrl } from "../App";
 
 const BASE_URL = `${backendUrl}/api/products`;
 
-export const getProducts = () => axios.get(BASE_URL);
+export const getProducts = () => {
+  return axios.get(BASE_URL);
+};
 
 export const addProduct = (formData) =>
   axios.post(BASE_URL, formData, {
