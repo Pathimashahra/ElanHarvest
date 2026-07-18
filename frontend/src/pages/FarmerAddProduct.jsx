@@ -12,7 +12,11 @@ const FarmerAddProduct = () => {
     price: "",
     category: "",
   });
+console.log("FORM DATA");
 
+for (let pair of formData.entries()) {
+  console.log(pair[0], pair[1]);
+}
   const [image, setImage] = useState(null);
 
   const farmer = JSON.parse(localStorage.getItem("farmer"));

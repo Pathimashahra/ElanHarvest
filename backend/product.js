@@ -79,10 +79,7 @@ const Product =
   mongoose.model("Product", productSchema);
 
 
-router.post(
-  "/",
-  upload.single("image"),
-  async(req,res)=>{
+router.post("/", upload.single("image"), async (req, res) => {
       console.log("PRODUCT BODY:",req.body);
     console.log("PRODUCT FILE:",req.file);
     try{
@@ -132,52 +129,24 @@ router.get("/test", (req, res) => {
   res.send("PRODUCT ROUTE WORKING");
 });
 
-router.post(
-  "/",
-  upload.single("image"),
-  async(req,res)=>{
+router.get("/", async (req, res) => {
+  try {
+    const products = await Product.find().populate("farmerId");
 
-    console.log("BODY:", req.body);
-    console.log("FILE:", req.file);
+    res.json({
+      success: true,
+      products,
+    });
+  } catch (err) {
+    console.log("GET PRODUCT ERROR:", err);
 
-    try {
-
-      const {
-        name,
-        price,
-        category,
-        farmerId
-      } = req.body;
-
-      if(!req.file){
-        return res.status(400).json({
-          success:false,
-          message:"Image missing"
-        });
-      }
-
-
-      const product = await Product.create({
-        name,
-        price:Number(price),
-        category,
-        farmerId,
-        image:req.file.path
-      });
-
-      res.status(201).json({
-        success:true,
-        product
-      });
-
-    } catch(err){
-      console.log("PRODUCT ERROR:",err);
-      res.status(500).json({
-        success:false,
-        message:err.message
-      });
-    }
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 });
+      
 
 router.get("/farmer/:id",async(req,res)=>{
     try{
