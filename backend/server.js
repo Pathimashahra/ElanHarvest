@@ -14,21 +14,20 @@ import paymentRoutes from "./payment.js";
 
 const app = express();
 
+
 app.use(
   cors({
-    origin: [
+    origin:[
       "https://elan-harvest-system.vercel.app",
       "http://localhost:5173"
     ],
-    credentials: true
+    credentials:true
   })
 );
 
-
-app.use(express.json());
 app.use(
  express.urlencoded({
-  extended:true
+   extended:true
  })
 );
 const port = process.env.PORT || 4000;
