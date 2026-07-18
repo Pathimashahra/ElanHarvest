@@ -152,7 +152,18 @@ for (const pair of formData.entries()) {
 
         <input
           type="file"
-          onChange={(e)=>setImage(e.target.files[0])}
+          onChange={(e)=>{
+
+ const file = e.target.files[0];
+
+ if(file.size > 2 * 1024 * 1024){
+   alert("Image size must be below 2MB");
+   return;
+ }
+
+ setImage(file);
+
+}}
           className="block mx-auto"/>
 
 

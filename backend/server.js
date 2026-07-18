@@ -33,8 +33,33 @@ app.use(
   })
 );
 
-connectDB();
+const port = process.env.PORT || 4000;
 
+
+const startServer = async()=>{
+
+  await connectDB();
+
+  if(process.env.NODE_ENV !== "production"){
+
+    app.listen(port,()=>{
+      console.log(
+        `Server Started ${port}`
+      );
+    });
+
+  }
+
+};
+app.get("/dbtest",(req,res)=>{
+
+ res.json({
+   readyState: mongoose.connection.readyState
+ });
+
+});
+
+startServer();
 export const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY
 );
