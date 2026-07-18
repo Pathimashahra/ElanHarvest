@@ -1,6 +1,7 @@
 import axios from "axios";
+import { backendUrl } from "../App";
 
-const BASE_URL = "/api/cart";
+const BASE_URL = `${backendUrl}/api/cart`;
 
 export const getCart = (userId) =>
   axios.get(`${BASE_URL}/${userId}`);
