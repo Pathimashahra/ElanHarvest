@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema(
 
 productSchema.pre("save", async function () {
   if (this.isNew && !this._id) {
-    const Product = mongoose.models.Product;
+    const Product = mongoose.model("Product");
     const products = await Product.find({}, "_id");
     let maxNum = 0;
     products.forEach((product)=>{
@@ -111,50 +111,25 @@ router.get("/",async(req,res)=>{
     });
   }
 });
-
-router.put("/:id", upload.single("image"), async(req,res)=>{
+router.get("/",async(req,res)=>{
   try{
-    const {
-      name,
-      price,
-      category,
-      farmerId
-    } = req.body;
 
-    const updateData = {
-      name,
-      price,
-      category,
-      farmerId
-    };
-
-    if(req.file){
-     updateData.image = req.file.path;
-    }
-
-    const updated =
-      await Product.findByIdAndUpdate(
-        req.params.id,
-        updateData,
-        {new:true}
-      );
-
-    if(!updated){
-      return res.status(404).json({
-        success:false,
-        message:"Product not found"
-      });
-    }
+    const products = await Product.find();
 
     res.json({
       success:true,
-      product:updated
+      products
     });
+
   }catch(err){
+
+    console.log("PRODUCT ERROR:",err);
+
     res.status(500).json({
       success:false,
       message:err.message
     });
+
   }
 });
 
