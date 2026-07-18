@@ -22,9 +22,8 @@ const Products = () => {
 
 const fetchProducts = async () => {
   try {
-    const res = await axios.get(
-  `${import.meta.env.VITE_API_URL}/api/products`
-);
+    const res = await axios.get("/api/products");
+
 
     console.log("API RESPONSE:", res.data);
 
