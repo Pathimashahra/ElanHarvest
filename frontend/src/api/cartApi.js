@@ -1,5 +1,5 @@
 import axios from "axios";
-import { backendUrl } from "../App";
+import { backendUrl } from "../config";
 
 const BASE_URL = `${backendUrl}/api/cart`;
 

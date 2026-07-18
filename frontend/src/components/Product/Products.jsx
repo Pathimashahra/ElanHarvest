@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { addToCart } from "../../api/cartApi";
 import { FaUser } from "react-icons/fa";
-import { backendUrl } from "../../App";
+import { backendUrl } from "../../config";
 
 const Products = () => {
   console.log("PRODUCT COMPONENT LOADED");
