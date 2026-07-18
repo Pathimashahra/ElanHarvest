@@ -30,7 +30,7 @@ import CompleteOrder from "./components/Checkout/CompleteOrder";
 
 
 
-export const backendUrl = "http://localhost:4000";
+export const backendUrl = "";
 
 const App = () => {
 

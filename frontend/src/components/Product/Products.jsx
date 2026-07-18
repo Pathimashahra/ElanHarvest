@@ -127,6 +127,9 @@ const fetchProducts = async () => {
                   </span>
                 </div>
 
+                <p className="text-xs text-secondary">
+                  100g
+                  </p>
                 <div className="flex justify-between items-center mt-4">
                   <p className="text-xl font-bold text-secondary">
                     Rs {p.price}
@@ -170,25 +173,46 @@ const fetchProducts = async () => {
               <span className="font-bold text-green-700">{selectedProduct.farmerId?.name || "Organic Farmer"}</span>
             </div>
 
-            <div className="flex justify-center gap-5 mb-3">
+            <div className="flex justify-center items-center gap-5 mb-3">
               <button
-                onClick={() =>
-                  setWeight(weight > 250 ? weight - 250 : 250)
+              onClick={() =>
+                  setWeight((prev) => Math.max(250, prev - 250))
                 }
-                className="w-10 h-10 bg-primary text-white rounded-lg"
+                className="w-10 h-10 bg-primary text-white rounded-lg text-xl"
               >
                 -
               </button>
 
-              <span className="text-xl font-bold">{weight}g</span>
+              <div className="flex items-center border-2 border-secondary rounded-xl px-3">
+                <input
+                  type="number"
+                  value={weight}
+                  min="250"
+                  max="50000"
+                  step="250"
+                  onChange={(e) => {
+                    let value = Number(e.target.value);
+
+                    if (value >= 250 && value <= 50000) {
+                      setWeight(value);
+                    }
+                  }}
+                  className="w-24 text-center text-xl font-bold outline-none"
+                />
+
+                <span className="text-xl font-bold">g</span>
+              </div>
 
               <button
-                onClick={() => setWeight(weight < 50000 ? weight + 250 : 50000)}
-                className="w-10 h-10 bg-primary text-white rounded-lg"
+                onClick={() =>
+                  setWeight((prev) => Math.min(50000, prev + 250))
+                }
+                className="w-10 h-10 bg-primary text-white rounded-lg text-xl"
               >
                 +
               </button>
             </div>
+
 
             <h3 className="text-2xl font-bold text-center mb-5">
               Rs {totalPrice}

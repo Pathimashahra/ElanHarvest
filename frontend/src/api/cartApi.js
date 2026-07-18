@@ -1,19 +1,20 @@
 import axios from "axios";
-import { backendUrl } from "../App";
+
+const BASE_URL = "/api/cart";
 
 export const getCart = (userId) =>
-  axios.get(`${backendUrl}/api/cart/${userId}`);
+  axios.get(`${BASE_URL}/${userId}`);
 
 export const addToCart = (data) =>
-  axios.post(`${backendUrl}/api/cart/add`, data);
+  axios.post(`${BASE_URL}/add`, data);
 
 export const updateCartItem = (data) =>
-  axios.put(`${backendUrl}/api/cart/update`, data);
+  axios.put(`${BASE_URL}/update`, data);
 
 export const removeFromCart = (data) =>
-  axios.delete(`${backendUrl}/api/cart/remove`, { data });
+  axios.delete(`${BASE_URL}/remove`, { data });
 
 export const clearCart = (userId) =>
-  axios.delete(`${backendUrl}/api/cart/clear`, {
+  axios.delete(`${BASE_URL}/clear`, {
     data: { userId },
   });
