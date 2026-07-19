@@ -52,24 +52,32 @@ const FarmerAddProduct = () => {
   formData.append("category", form.category);
   formData.append("farmerId", farmerId);
 
-  if (image) formData.append("image", image);
-  console.log("FORM DATA");
+  if (image) {
+    formData.append("image", image);
+  }
 
-for (const pair of formData.entries()) {
-  console.log(pair[0], pair[1]);
-}
   try {
     if (editId) {
       await axios.put(
         `${backendUrl}/api/products/${editId}`,
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       alert("Product Updated Successfully");
     } else {
       await axios.post(
         `${backendUrl}/api/products`,
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       alert("Product Added Successfully");
@@ -78,9 +86,16 @@ for (const pair of formData.entries()) {
     resetForm();
     setShowForm(false);
     fetchProducts();
+
   } catch (err) {
-    console.log(err.response?.data || err.message);
-    alert("Error occurred");
+    console.log("FULL ERROR:", err);
+
+    if (err.response) {
+      console.log("STATUS:", err.response.status);
+      console.log("DATA:", err.response.data);
+    }
+
+    alert(err.response?.data?.message || err.message);
   }
 };
   const handleEdit = (p) => {
@@ -153,17 +168,14 @@ for (const pair of formData.entries()) {
         <input
           type="file"
           onChange={(e)=>{
-
- const file = e.target.files[0];
-
- if(file.size > 2 * 1024 * 1024){
-   alert("Image size must be below 2MB");
-   return;
- }
-
- setImage(file);
-
-}}
+            
+            const file = e.target.files[0];
+            if(file.size > 5 * 1024 * 1024){
+              alert("Image size must be below 5MB");
+              return;
+            }
+            setImage(file);
+          }}
           className="block mx-auto"/>
 
 
