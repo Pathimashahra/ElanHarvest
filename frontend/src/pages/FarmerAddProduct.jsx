@@ -86,14 +86,38 @@ const FarmerAddProduct = () => {
 
 const handleImageChange = async (e) => {
   const file = e.target.files[0];
+
   if (file) {
     try {
-      // Compress the image before setting it
+
+      console.log(
+        "Original Size:",
+        (file.size / 1024 / 1024).toFixed(2),
+        "MB"
+      );
+
+
       const compressedFile = await compressImage(file);
+
+
+      console.log(
+        "Compressed Size:",
+        (compressedFile.size / 1024 / 1024).toFixed(2),
+        "MB"
+      );
+
+
       setImage(compressedFile);
+
+
     } catch (err) {
-      console.log("Image compression error:", err);
-      setImage(file); // Fallback to original file
+
+      console.log(
+        "Compression error:",
+        err
+      );
+
+      setImage(file);
     }
   }
 };
@@ -256,14 +280,9 @@ const handleImageChange = async (e) => {
               Product Image
             </label>
             <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files[0];
-              if (!file) return;
-              console.log("Size:", file.size / 1024 / 1024, "MB");
-              setImage(file);
-  }}
+  type="file"
+  accept="image/*"
+  onChange={handleImageChange}
 />
             {image && (
               <p className="text-sm text-gray-500 mt-1">

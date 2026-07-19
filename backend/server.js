@@ -20,7 +20,7 @@ const app = express();
 const allowedOrigins = [
   "https://elan-harvest-system.vercel.app",
   "http://localhost:5173",
-  "http://localhost:3000"
+  "http://localhost:4000"
 ];
 
 
