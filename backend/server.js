@@ -17,33 +17,27 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://elan-harvest-system.vercel.app"
-];
-
 app.use(
  cors({
-   origin: function(origin, callback){
-
-     if(!origin || allowedOrigins.includes(origin)){
-       callback(null,true);
-     }else{
-       callback(new Error("Not allowed by CORS"));
-     }
-
-   },
+   origin:true,
    credentials:true
  })
 );
 
 
+app.options("*", cors());
+
 app.use(express.json());
-
-
+app.use(express.urlencoded({extended:true}));
 app.use(
- express.urlencoded({
-    extended:true
+ cors({
+   origin: [
+     "http://localhost:5173",
+     "https://elan-harvest.vercel.app"
+   ],
+   methods:["GET","POST","PUT","DELETE"],
+   allowedHeaders:["Content-Type"],
+   credentials:true
  })
 );
 

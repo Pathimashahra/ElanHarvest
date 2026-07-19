@@ -52,51 +52,49 @@ const FarmerAddProduct = () => {
   formData.append("category", form.category);
   formData.append("farmerId", farmerId);
 
-  if (image) {
-    formData.append("image", image);
+ if(image){
+ formData.append("image", image);
+}
+
+for (const pair of formData.entries()) {
+ console.log(pair[0], pair[1]);
+}
+
+try {
+  if (editId) {
+
+    await axios.put(
+      `${backendUrl}/api/products/${editId}`,
+      formData
+    );
+
+    alert("Product Updated Successfully");
+
+  } else {
+
+    await axios.post(
+      `${backendUrl}/api/products`,
+      formData
+    );
+
+    alert("Product Added Successfully");
   }
 
-  try {
-    if (editId) {
-      await axios.put(
-        `${backendUrl}/api/products/${editId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+  resetForm();
+  setShowForm(false);
+  fetchProducts();
 
-      alert("Product Updated Successfully");
-    } else {
-      await axios.post(
-        `${backendUrl}/api/products`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+} catch (err) {
 
-      alert("Product Added Successfully");
-    }
+  console.log("FULL ERROR:", err);
 
-    resetForm();
-    setShowForm(false);
-    fetchProducts();
-
-  } catch (err) {
-    console.log("FULL ERROR:", err);
-
-    if (err.response) {
-      console.log("STATUS:", err.response.status);
-      console.log("DATA:", err.response.data);
-    }
-
-    alert(err.response?.data?.message || err.message);
+  if (err.response) {
+    console.log("STATUS:", err.response.status);
+    console.log("DATA:", err.response.data);
   }
+
+  alert(err.response?.data?.message || err.message);
+}
 };
   const handleEdit = (p) => {
     setForm({
@@ -166,17 +164,15 @@ const FarmerAddProduct = () => {
 
 
         <input
-          type="file"
-          onChange={(e)=>{
-            
-            const file = e.target.files[0];
-            if(file.size > 5 * 1024 * 1024){
-              alert("Image size must be below 5MB");
-              return;
-            }
-            setImage(file);
-          }}
-          className="block mx-auto"/>
+ type="file"
+ onChange={(e)=>{
+   const file = e.target.files[0];
+
+   console.log("SELECTED IMAGE:", file);
+
+   setImage(file);
+ }}
+/>
 
 
         <button
