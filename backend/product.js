@@ -6,9 +6,6 @@ import cloudinary from "./config/cloudinary.js";
 
 const router = express.Router();
 
-
-// ================= CLOUDINARY =================
-
 const storage = new CloudinaryStorage({
   cloudinary,
   params:{
@@ -22,17 +19,12 @@ const storage = new CloudinaryStorage({
   }
 });
 
-
 const upload = multer({
   storage,
   limits:{
     fileSize:10 * 1024 * 1024
   }
 });
-
-
-
-// ================= SCHEMA =================
 
 const productSchema = new mongoose.Schema(
 {
@@ -81,15 +73,9 @@ mongoose.model(
 productSchema
 );
 
-
-// ================= GET =================
-
 router.get("/",async(req,res)=>{
-
 try{
-
 const products = await Product.find();
-
 res.json({
 success:true,
 products
@@ -98,81 +84,42 @@ products
 
 }
 catch(err){
-
 console.log(err);
-
 res.status(500).json({
 success:false,
 message:err.message
 });
-
 }
-
 });
 
-
-
-
-// ================= POST =================
-
-
-router.post(
-"/",
-upload.single("image"),
-async(req,res)=>{
-
-
-try{
-
-
-console.log("BODY",req.body);
-console.log("FILE",req.file);
-
-
-
-if(!req.file){
-
-return res.status(400).json({
-success:false,
-message:"Image required"
+router.post("/",upload.single("image"),async(req,res)=>{
+   try{
+      console.log("BODY",req.body);
+      console.log("FILE",req.file);
+      if(!req.file){
+         return res.status(400).json({
+            success:false,
+            message:"Image required"
 });
 
 }
-
-const productId =
-"pr" + Date.now();
-const product = new Product({
-
+const productId ="pr" + Date.now();const product = new Product({
 name:req.body.name,
-
 price:Number(req.body.price),
-
 category:req.body.category,
-
 farmerId:req.body.farmerId,
-
 image:req.file.path
-
 });
 
 console.log("PRODUCT ID:", product._id);
 
-
 await product.save();
-
-
 console.log("SAVED");
-
-
-
 res.status(201).json({
-
 success:true,
 product
 
 });
-
-
 
 }
 catch(err){
@@ -186,92 +133,89 @@ res.status(500).json({
 
 success:false,
 message:err.message
-
 });
-
 }
-
-
 });
 
-
-
-
-// ================= FARMER PRODUCTS =================
-
-
-router.get(
-"/farmer/:id",
-async(req,res)=>{
-
-
-try{
-
-const products =
-await Product.find({
-farmerId:req.params.id
+router.get("/farmer/:id",async(req,res)=>{
+   try{
+      const products =
+      await Product.find({
+         farmerId:req.params.id
+      });   
+      res.json({
+         success:true,
+         products
+      });
+   }
+   catch(err){
+      res.status(500).json({
+         success:false,
+         message:err.message
+      });
+   }
 });
 
+router.put("/:id", upload.single("image"), async (req, res) => {
+  try {
+    console.log("UPDATE ID:", req.params.id);
+    console.log("UPDATE BODY:", req.body);
+    console.log("UPDATE FILE:", req.file);
+    const updateData = {
+      name: req.body.name,
+      price: Number(req.body.price),
+      category: req.body.category
+    };
+    if(req.file){
+      updateData.image = req.file.path;
+    }
+    const product = await Product.findOneAndUpdate(
+      {
+        _id:req.params.id
+      },
+      updateData,
+      {
+        new:true
+      }
+    );
 
-res.json({
-success:true,
-products
+    if(!product){
+      return res.status(404).json({
+        success:false,
+        message:"Product not found"
+      });
+    }
+    res.json({
+      success:true,
+      product
+    });
+  }
+  catch(error){
+    console.log("UPDATE ERROR:",error);
+    res.status(500).json({
+      success:false,
+      message:error.message
+    });
+  }
 });
 
-
+router.delete("/:id",async(req,res)=>{
+   try{
+      const result =
+      await Product.deleteOne({
+         _id:req.params.id
+      });
+      res.json({
+         success:true,
+         result
+      });
 }
 catch(err){
-
-res.status(500).json({
-success:false,
-message:err.message
-});
-
+   res.status(500).json({
+      success:false,
+      message:err.message
+   });
 }
-
-
 });
-
-
-
-
-// ================= DELETE =================
-
-
-router.delete("/:id",
-async(req,res)=>{
-
-
-try{
-
-
-const result =
-await Product.deleteOne({
-_id:req.params.id
-});
-
-
-res.json({
-
-success:true,
-result
-
-});
-
-
-}
-catch(err){
-
-res.status(500).json({
-success:false,
-message:err.message
-});
-
-}
-
-
-});
-
-
 
 export default router;

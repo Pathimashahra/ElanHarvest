@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { backendUrl } from "../App"; // Import from App.jsx
+import { backendUrl } from "../App";
 
 const FarmerAddProduct = () => {
   const [showForm, setShowForm] = useState(false);
@@ -38,8 +38,8 @@ const FarmerAddProduct = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-// Add this helper function to compress images
-const compressImage = (file) => {
+
+  const compressImage = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -76,7 +76,7 @@ const compressImage = (file) => {
             lastModified: Date.now()
           });
           resolve(compressedFile);
-        }, 'image/jpeg', 0.7); // 70% quality
+        }, 'image/jpeg', 0.7);
       };
       img.onerror = reject;
     };
@@ -84,7 +84,6 @@ const compressImage = (file) => {
   });
 };
 
-// In your handleImageChange function:
 const handleImageChange = async (e) => {
   const file = e.target.files[0];
   if (file) {
@@ -177,8 +176,6 @@ const handleImageChange = async (e) => {
     }
   };
 
-  // ... rest of your component (handleEdit, handleDelete, return)
-
   const handleEdit = (p) => {
     setForm({
       name: p.name,
@@ -187,7 +184,6 @@ const handleImageChange = async (e) => {
     });
     setEditId(p._id);
     setShowForm(true);
-    // Note: The image field will need to be re-uploaded for updates
   };
 
   const handleDelete = async (id) => {
@@ -260,16 +256,13 @@ const handleImageChange = async (e) => {
               Product Image
             </label>
             <input
-  type="file"
-  accept="image/*"
-  onChange={(e) => {
-    const file = e.target.files[0];
-
-    if (!file) return;
-
-    console.log("Size:", file.size / 1024 / 1024, "MB");
-
-    setImage(file);
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (!file) return;
+              console.log("Size:", file.size / 1024 / 1024, "MB");
+              setImage(file);
   }}
 />
             {image && (
