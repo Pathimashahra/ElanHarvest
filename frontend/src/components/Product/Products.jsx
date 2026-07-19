@@ -32,7 +32,6 @@ console.log("DATA", res.data);
 
 setProducts(res.data.products || []);
 
-
     console.log("API RESPONSE:", res.data);
 
     setProducts(res.data.products || res.data || []);
@@ -130,9 +129,9 @@ setProducts(res.data.products || []);
                 <p className="text-sm text-primary">{p.category}</p>
 
                 <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-500">
-                  <span className="bg-green-50 text-green-700 font-medium px-2 py-0.5 rounded-full border border-green-200 flex items-center gap-1">
-                    <FaUser className="text-[10px]" /> {p.farmerId?.name || "Organic Farmer"}
-                  </span>
+                  <span className="font-bold text-green-700">
+                    Farmer ID: {selectedProduct.farmerId || "N/A"}
+                    </span>
                 </div>
 
                 <p className="text-xs text-secondary">

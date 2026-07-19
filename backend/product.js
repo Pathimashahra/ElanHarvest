@@ -72,24 +72,50 @@ mongoose.model(
 "Product",
 productSchema
 );
-
-router.get("/",async(req,res)=>{
+router.get("/", async(req,res)=>{
 try{
+
 const products = await Product.find();
+
+const Farmer = mongoose.model("Farmer");
+
+const productsWithFarmer = await Promise.all(
+  products.map(async(product)=>{
+
+    const farmer = await Farmer.findOne({
+      _id: product.farmerId
+    });
+
+    return {
+      ...product.toObject(),
+      farmerId:{
+        _id: product.farmerId,
+        name: farmer?.name || "Unknown Farmer"
+      }
+    };
+
+  })
+);
+
+
 res.json({
 success:true,
-products
+products:productsWithFarmer
 });
 
 
 }
 catch(err){
+
 console.log(err);
+
 res.status(500).json({
 success:false,
 message:err.message
 });
+
 }
+
 });
 
 router.post("/",upload.single("image"),async(req,res)=>{

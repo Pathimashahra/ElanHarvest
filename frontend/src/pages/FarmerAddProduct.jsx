@@ -95,20 +95,14 @@ const handleImageChange = async (e) => {
         (file.size / 1024 / 1024).toFixed(2),
         "MB"
       );
-
-
       const compressedFile = await compressImage(file);
-
 
       console.log(
         "Compressed Size:",
         (compressedFile.size / 1024 / 1024).toFixed(2),
         "MB"
       );
-
-
       setImage(compressedFile);
-
 
     } catch (err) {
 
@@ -280,10 +274,10 @@ const handleImageChange = async (e) => {
               Product Image
             </label>
             <input
-  type="file"
-  accept="image/*"
-  onChange={handleImageChange}
-/>
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            />
             {image && (
               <p className="text-sm text-gray-500 mt-1">
                 Selected: {image.name} ({(image.size / 1024).toFixed(2)} KB)
