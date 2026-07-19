@@ -28,13 +28,15 @@ import Cancel from "./components/Checkout/Cancel";
 import Success from "./components/Checkout/Success";
 import CompleteOrder from "./components/Checkout/CompleteOrder";
 
+// For development, use empty string (proxy will handle it)
+// For production, use the actual backend URL
+export const backendUrl = import.meta.env.DEV 
+  ? ''  // Empty string = use Vite proxy
+  : import.meta.env.VITE_API_URL || "https://elan-harvest.vercel.app";
 
-export const backendUrl =
-  import.meta.env.VITE_API_URL || "https://elan-harvest.vercel.app";
+console.log('BACKEND URL:', backendUrl || 'Using proxy');
 
-console.log("BACKEND URL:", backendUrl);
 const App = () => {
-
   const [token, setToken] = useState(
     localStorage.getItem("token") || ""
   );
@@ -44,13 +46,13 @@ const App = () => {
   const isFarmerPage =
     location.pathname === "/farmerlogin" ||
     location.pathname === "/farmerdashboard" ||
-    location.pathname === "/farmeraddproduct"||
-    location.pathname === "/farmerorders"||
-    location.pathname === "/admindashboard"||
-    location.pathname === "/adminproducts"||
-    location.pathname === "/adminfarmers"||
-    location.pathname === "/adminusers"||
-    location.pathname === "/adminlogin"||
+    location.pathname === "/farmeraddproduct" ||
+    location.pathname === "/farmerorders" ||
+    location.pathname === "/admindashboard" ||
+    location.pathname === "/adminproducts" ||
+    location.pathname === "/adminfarmers" ||
+    location.pathname === "/adminusers" ||
+    location.pathname === "/adminlogin" ||
     location.pathname === "/adminorders";
 
   return (
@@ -69,20 +71,20 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/orders" element={<Orders/>} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/farmerlogin" element={<FarmerLogin />} />
         <Route path="/farmerdashboard" element={<FarmerDashboard />} />
         <Route path="/farmeraddproduct" element={<FarmerAddProduct />} />
         <Route path="/farmerorders" element={<FarmerOrders />} />
-        <Route path="/admindashboard" element={<AdminDashboard />}/>
-        <Route path="/adminproduct" element={<AdminProducts />}/>
-        <Route path="/adminfarmers" element={<AdminFarmers />}/>
-        <Route path="/adminusers" element={<AdminUsers />}/>
-        <Route path="/adminlogin" element={<AdminLogin />}/>
-        <Route path="/adminorders" element={<AdminOrders />}/>
+        <Route path="/admindashboard" element={<AdminDashboard />} />
+        <Route path="/adminproduct" element={<AdminProducts />} />
+        <Route path="/adminfarmers" element={<AdminFarmers />} />
+        <Route path="/adminusers" element={<AdminUsers />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/adminorders" element={<AdminOrders />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
-        <Route path="/completeorder/:id" element={<CompleteOrder />}/>
+        <Route path="/completeorder/:id" element={<CompleteOrder />} />
       </Routes>
 
       {!isFarmerPage && <Footer />}

@@ -19,6 +19,7 @@ const FarmerDashboard = () => {
   const [farmerName, setFarmerName] = useState("");
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
+  const [showForm, setShowForm] = useState(false);
 
   const navigate = useNavigate();
 

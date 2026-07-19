@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
-import "dotenv/config";
+import dotenv from "dotenv";
 import Stripe from "stripe";
+import multer from "multer";
 
 import connectDB from "./config/mongodb.js";
 
@@ -12,51 +13,58 @@ import orderRoutes from "./order.js";
 import farmerRoutes from "./farmer.js";
 import paymentRoutes from "./payment.js";
 
-import dotenv from "dotenv";
 
 dotenv.config();
+
 const app = express();
 
+
+const allowedOrigins=[
+"https://elan-harvest-system.vercel.app",
+"http://localhost:5173",
+"http://localhost:3000",
+"http://127.0.0.1:5173"
+];
+
+
 app.use(
-  cors({
-    origin: [
-      "https://elan-harvest-system.vercel.app",
-      "http://localhost:5173"
-    ],
-    credentials: true
-  })
+cors({
+origin:true,
+credentials:true
+})
 );
 
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(
-  cors({
-    origin: true,
-    credentials: true
-  })
-);
+app.use(express.json({
+limit:"50mb"
+}));
+
+app.use(express.urlencoded({
+extended:true,
+limit:"50mb"
+}));
 
 
 connectDB();
 
 
-export const stripe = new Stripe(
- process.env.STRIPE_SECRET_KEY
+export const stripe =
+new Stripe(
+process.env.STRIPE_SECRET_KEY
 );
 
 
 
 app.get("/",(req,res)=>{
- res.send("API Working");
+res.send("API Working");
 });
 
 
 app.get("/test",(req,res)=>{
- res.send("TEST OK");
+res.send("TEST OK");
 });
 
-app.options("/{*any}", cors());
+
 
 app.use("/api/products",productRoutes);
 app.use("/api/users",userRoutes);
@@ -64,40 +72,50 @@ app.use("/api/cart",cartRoutes);
 app.use("/api/orders",orderRoutes);
 app.use("/api/farmers",farmerRoutes);
 app.use("/api/payment",paymentRoutes);
-app.use((err,req,res,next)=>{
- console.log(
-  "GLOBAL ERROR:",
-  err
- );
- res.status(500).json({
-    success:false,
-    message:err.message
- });
+
+
+
+app.use((req,res)=>{
+res.status(404).json({
+success:false,
+message:"Route not found"
 });
+});
+
+
+
+app.use((err,req,res,next)=>{
+
+console.log("ERROR:",err);
+
+
+if(err instanceof multer.MulterError){
+
+return res.status(400).json({
+success:false,
+message:err.message
+});
+
+}
+
+
+res.status(500).json({
+success:false,
+message:err.message
+});
+
+
+});
+
+
 
 if(process.env.NODE_ENV !== "production"){
 
-const port =
-process.env.PORT || 4000;
-app.listen(port,()=>{
- console.log(
-  `Server running ${port}`
- );
+app.listen(4000,()=>{
+console.log("Server running 4000");
 });
+
 }
-app.use((err, req, res, next) => {
 
- console.log("GLOBAL ERROR:", err);
 
- res.header(
-   "Access-Control-Allow-Origin",
-   "*"
- );
-
- res.status(500).json({
-   success:false,
-   message:err.message
- });
-
-});
 export default app;
