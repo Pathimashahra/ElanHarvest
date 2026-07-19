@@ -55,6 +55,7 @@ function AdminOrders() {
               <th className="p-4">Order ID</th>
               <th className="p-4">Farmer ID</th>
               <th className="p-4">Customer Details</th>
+              <th className="p-4">Phone</th>
               <th className="p-4">Products</th>
               <th className="p-4">Total</th>
               <th className="p-4">Payment</th>
