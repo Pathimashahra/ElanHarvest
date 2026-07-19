@@ -114,7 +114,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-[#f0fff4] to-white">
+    <div className="flex min-h-screen bg-green-100">
 
       <div className="w-64 bg-white shadow-lg p-5">
 
