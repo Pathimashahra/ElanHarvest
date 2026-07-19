@@ -166,10 +166,7 @@ try {
         <input
  type="file"
  onChange={(e)=>{
-   const file = e.target.files[0];
-
-   console.log("SELECTED IMAGE:", file);
-
+   const file=e.target.files[0];
    setImage(file);
  }}
 />
