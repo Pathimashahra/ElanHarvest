@@ -136,26 +136,6 @@ message:err.message
 });
 }
 });
-
-router.get("/farmer/:id",async(req,res)=>{
-   try{
-      const products =
-      await Product.find({
-         farmerId:req.params.id
-      });   
-      res.json({
-         success:true,
-         products
-      });
-   }
-   catch(err){
-      res.status(500).json({
-         success:false,
-         message:err.message
-      });
-   }
-});
-
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     console.log("UPDATE ID:", req.params.id);
@@ -198,6 +178,26 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     });
   }
 });
+router.get("/farmer/:id",async(req,res)=>{
+   try{
+      const products =
+      await Product.find({
+         farmerId:req.params.id
+      });   
+      res.json({
+         success:true,
+         products
+      });
+   }
+   catch(err){
+      res.status(500).json({
+         success:false,
+         message:err.message
+      });
+   }
+});
+
+
 
 router.delete("/:id",async(req,res)=>{
    try{
