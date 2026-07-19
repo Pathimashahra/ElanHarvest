@@ -110,7 +110,7 @@ setProducts(res.data.products || []);
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
         {filteredProducts.length > 0 ? (
-          filteredProducts.map((p) => (
+         filteredProducts.filter(Boolean).map((p) => (
             <div
               key={p._id}
               className="bg-white rounded-3xl shadow-md hover:shadow-xl transition overflow-hidden"
@@ -130,7 +130,7 @@ setProducts(res.data.products || []);
 
                 <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-500">
                   <span className="bg-green-50 text-green-700 font-medium px-2 py-0.5 rounded-full border border-green-200 flex items-center gap-1">
-                    <FaUser className="text-[10px]" /> Farmer ID: {p.farmerId || "N/A"}
+                    <FaUser className="text-[10px]" />  {typeof p.farmerId === "object"? p.farmerId?.name: p.farmerId || "Organic Farmer"}
                   </span>
                 </div>
 
@@ -177,7 +177,8 @@ setProducts(res.data.products || []);
               <span className="font-semibold text-secondary flex items-center gap-1">
                 <FaUser className="text-xs text-primary" /> Farmer:
               </span>
-              <span className="font-bold text-green-700">{selectedProduct.farmerId?.name || "Organic Farmer"}</span>
+              <span className="font-bold text-green-700">{typeof selectedProduct.farmerId === "object"
+              ?selectedProduct.farmerId?.name:selectedProduct.farmerId || "Organic Farmer"}</span>
             </div>
 
             <div className="flex justify-center items-center gap-5 mb-3">
