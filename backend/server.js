@@ -28,15 +28,15 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://elan-harvest.vercel.app",
-      "https://elan-harvest-system.vercel.app"
-    ],
-    credentials:true,
-    methods:["GET","POST","PUT","DELETE"]
-  })
+ cors({
+   origin:[
+     "http://localhost:5173",
+     "https://elan-harvest.vercel.app"
+   ],
+   credentials:true,
+   methods:["GET","POST","PUT","DELETE"],
+   allowedHeaders:["Content-Type","Authorization"]
+ })
 );
 
 
@@ -58,7 +58,7 @@ app.get("/test",(req,res)=>{
  res.send("TEST OK");
 });
 
-
+app.options("/{*any}", cors());
 
 app.use("/api/products",productRoutes);
 app.use("/api/users",userRoutes);
