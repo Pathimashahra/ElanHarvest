@@ -21,11 +21,10 @@ const storage = new CloudinaryStorage({
 
 
 const upload = multer({
-   storage,
-   limits:{
-    fileSize:5*1024*1024
+ storage,
+ limits:{
+  fileSize:5 * 1024 * 1024
  }
-
 });
 
 const productSchema =
@@ -54,23 +53,6 @@ new mongoose.Schema({
 },
 {
    timestamps:true
-});
-
-productSchema.pre(
-"save",
-async function(){
-
-if(this.isNew && !this._id){
-   const Product =
-   mongoose.model("Product");
-const count =
-await Product.countDocuments();
-
-
-this._id =
-"pr"+String(count+1)
-.padStart(4,"0");
-}
 });
 
 const Product =
@@ -103,13 +85,9 @@ res.status(500).json({
 }
 });
 
-router.post("/",upload.single("image"),
-async(req,res)=>{
-   console.log(
-      "BODY:",
-      req.body
-   );
-   
+router.post("/",upload.single("image"),async(req,res)=>{
+   console.log("POST PRODUCT HIT");
+   console.log("BODY:",req.body);
    console.log("FILE:",req.file);
    try{
       if(!req.file){
