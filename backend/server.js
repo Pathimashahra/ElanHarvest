@@ -17,18 +17,16 @@ import paymentRoutes from "./payment.js";
 dotenv.config();
 
 const app = express();
-
-
 const allowedOrigins = [
   "https://elan-harvest-system.vercel.app",
-  "https://elan-harvest.vercel.app",
-  "http://localhost:5173"
+  "http://localhost:5173",
+  "http://localhost:3000"
 ];
 
 
 app.use(
   cors({
-    origin: (origin, callback)=>{
+    origin: function(origin, callback){
 
       if(!origin){
         return callback(null,true);
@@ -40,13 +38,26 @@ app.use(
       }
 
 
-      return callback(
-        new Error("Not allowed by CORS")
-      );
+      console.log("Blocked CORS:", origin);
+
+      return callback(null,false);
 
     },
 
-    credentials:true
+    credentials:true,
+
+    methods:[
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE",
+      "OPTIONS"
+    ],
+
+    allowedHeaders:[
+      "Content-Type",
+      "Authorization"
+    ]
   })
 );
 
