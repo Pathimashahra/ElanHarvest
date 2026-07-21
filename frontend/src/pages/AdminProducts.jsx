@@ -39,7 +39,6 @@ const AdminProducts = () => {
           Products List ({products.length})
         </h2>
       </div>
-
       <div className="overflow-x-auto">
 
         <table className="min-w-full divide-y divide-gray-100">
