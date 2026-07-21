@@ -39,7 +39,7 @@ function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 font-poppins">
+    <div className="flex items-center justify-center min-h-screen bg-green-200/50 font-poppins">
         <form
           onSubmit={handleSubmit}
           className="w-[420px] bg-white p-8 rounded-2xl shadow-2xl"
@@ -81,7 +81,7 @@ function AdminLogin() {
             <button
               type="button"
               onClick={() => navigate("/")}
-              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl font-semibold transition"
+              className="w-full bg-gray-200 hover:bg-green-200/50 text-gray-800 py-3 rounded-xl font-semibold transition"
             >
               Back to Home
             </button>

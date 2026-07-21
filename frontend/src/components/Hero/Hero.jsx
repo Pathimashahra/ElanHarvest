@@ -13,7 +13,7 @@ const Hero = () => {
 
 
       <div
-        className="container grid grid-cols-1 bg-gradient-to-b from-[#f0fff4] to-white md:grid-cols-2 min-h-[550px] relative">
+        className="container grid grid-cols-1 bg-gradient-to-b from-[#f0fff8] to-white md:grid-cols-2 min-h-[550px] relative">
 
         <div className='flex flex-col justify-center py-14 md:py-0 relative z-10'>
           <div className='text-center md:text-left space-y-6 lg:max-w-[400px]'>

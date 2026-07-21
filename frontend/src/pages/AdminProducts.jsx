@@ -33,8 +33,8 @@ const AdminProducts = () => {
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
 
-      <div className="p-6 bg-gradient-to-r from-green-50 to-green-100/50 border-b border-gray-100">
-        <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+      <div className="p-6 bg-secondary border-b border-gray-100">
+        <h2 className="text-xl font-bold text-white flex items-center gap-2">
           <FaBoxOpen className="text-primary" />
           Products List ({products.length})
         </h2>
@@ -45,7 +45,7 @@ const AdminProducts = () => {
         <table className="min-w-full divide-y divide-gray-100">
 
           <thead>
-            <tr className="bg-gray-50 text-left text-sm font-bold text-secondary uppercase tracking-wider">
+            <tr className="bg-gray-100 text-left text-sm font-bold text-secondary uppercase tracking-wider">
               <th className="p-4">Farmer</th>
               <th className="p-4">Image</th>
               <th className="p-4">Product</th>
@@ -72,7 +72,7 @@ const AdminProducts = () => {
                           {p.farmerId.name}
                         </div>
 
-                        <div className="text-xs text-gray-600">
+                        <div className="text-xs text-gray-700">
                           ID : {p.farmerId._id}
                         </div>
                       </div>

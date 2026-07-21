@@ -94,7 +94,7 @@ const Login = ({ setToken }) => {
 
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 font-poppins">
+    <div className="flex items-center justify-center min-h-screen bg-green-100/50 font-poppins">
 
       <form
         onSubmit={formSubmission}

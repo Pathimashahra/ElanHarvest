@@ -70,11 +70,11 @@ const FarmerDashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-green-100">
+    <div className="flex min-h-screen bg-green-200/50">
 
-      <div className="w-64 bg-white shadow-lg p-5">
+      <div className="w-64 bg-secondary text-white shadow-lg p-5">
 
-        <h1 className="text-2xl font-bold text-secondary mb-8 flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
           <FaLeaf /> Elan Harvest
         </h1>
 

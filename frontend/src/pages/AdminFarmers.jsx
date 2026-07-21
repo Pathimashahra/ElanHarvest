@@ -79,9 +79,9 @@ function AdminFarmers() {
 
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
 
-      <div className="p-6 bg-gradient-to-r from-green-50 to-green-100/50 border-b">
+      <div className="p-6 bg-secondary border-b">
 
-        <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+        <h2 className="text-xl font-bold text-white flex items-center gap-2">
 
           <FaUserTie className="text-primary"/>
 
@@ -97,7 +97,7 @@ function AdminFarmers() {
 
           <thead>
 
-            <tr className="bg-gray-50 text-left text-sm text-secondary font-bold uppercase">
+            <tr className="bg-gray-100 text-left text-sm text-secondary font-bold uppercase">
               <th className="p-4">Farmer ID</th>
               <th className="p-4">Name</th>
               <th className="p-4">Phone</th>

@@ -32,8 +32,8 @@ function AdminUsers() {
 
     return (
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-        <div className="p-6 bg-gradient-to-r from-green-50 to-green-100/50 border-b border-gray-100">
-          <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+        <div className="p-6 bg-secondary border-b border-gray-100">
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
             <FaUsers className="text-primary" /> Registered Customers ({users.length})
           </h2>
         </div>
@@ -41,7 +41,7 @@ function AdminUsers() {
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-100">
             <thead>
-              <tr className="bg-gray-50 text-left text-sm font-bold text-secondary uppercase tracking-wider">
+              <tr className="bg-gray-100 text-left text-sm font-bold text-secondary uppercase tracking-wider">
                 <th className="p-4">User ID</th>
                 <th className="p-4">Name</th>
                 <th className="p-4">Phone</th>
@@ -54,11 +54,11 @@ function AdminUsers() {
               {users.length > 0 ? (
                 users.map((u) => (
                   <tr key={u._id} className="hover:bg-green-50/20 transition duration-150">
-                    <td className="p-4 text-sm font-semibold text-gray-600">{u._id}</td>
+                    <td className="p-4 text-sm font-semibold text-gray-700">{u._id}</td>
                     <td className="p-4 text-sm font-bold text-gray-800">{u.name}</td>
-                    <td className="p-4 text-sm text-gray-700">{u.phone}</td>
-                    <td className="p-4 text-sm text-gray-700">{u.address}</td>
-                    <td className="p-4 text-sm text-gray-700">{u.email}</td>
+                    <td className="p-4 text-sm text-gray-800">{u.phone}</td>
+                    <td className="p-4 text-sm text-gray-800">{u.address}</td>
+                    <td className="p-4 text-sm text-gray-800">{u.email}</td>
                     <td className="p-4 text-center">
                       <button
                         onClick={() => handleDelete(u._id)}

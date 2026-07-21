@@ -80,7 +80,7 @@ function FarmerLogin() {
           className="h-full w-full object-cover"/>
       </div>
 
-      <div className="w-full md:w-1/2 flex items-center justify-center bg-green-50">
+      <div className="w-full md:w-1/2 flex items-center justify-center bg-green-200/50">
         <form
           onSubmit={handleSubmit}
           className="w-[420px] bg-white p-8 rounded-2xl shadow-2xl">

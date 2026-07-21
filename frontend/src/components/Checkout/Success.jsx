@@ -30,49 +30,32 @@ const Success = () => {
 
 
         if(res.data.success){
-
-await clearCart(userId);
-
-
-alert(
-"Payment Successful"
-);
-
-
-navigate("/orders");
-
-
-}
-        else{
-
-          alert("Payment verification failed");
-
-          navigate("/checkout");
-
+          await clearCart(userId);
+          alert(
+            "Payment Successful"
+          );
+          navigate("/orders");
         }
-
-
+        else{
+          alert("Payment verification failed");
+          navigate("/checkout");
+        }
       } catch(err){
-
         console.log("VERIFY ERROR:", err);
-
       }
-
     };
-
 
     if(sessionId){
       verifyPayment();
     }
 
-
   }, [sessionId, navigate]);
 
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen flex items-center bg-green-100/50 justify-center">
 
-      <h1 className="text-green-600 text-2xl font-bold">
+      <h1 className="text-secondary text-2xl font-bold">
         Payment Successful... Redirecting
       </h1>
 

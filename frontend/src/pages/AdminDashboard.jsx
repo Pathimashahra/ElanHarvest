@@ -32,7 +32,7 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      // Use imported backendUrl
+     
 
       const userRes = await axios.get(`${backendUrl}/api/users`);
       const farmerRes = await axios.get(`${backendUrl}/api/farmers`);
@@ -114,11 +114,11 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-green-100">
+    <div className="flex min-h-screen bg-green-200/50">
 
-      <div className="w-64 bg-white shadow-lg p-5">
+      <div className="w-64 bg-secondary text-white shadow-lg p-5">
 
-        <h1 className="text-2xl font-bold text-secondary mb-8 flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
           <FaLeaf />
           Elan Harvest
         </h1>
@@ -129,8 +129,8 @@ const AdminDashboard = () => {
             onClick={() => setActiveTab("dashboard")}
             className={`flex items-center gap-3 p-3 rounded cursor-pointer transition ${
               activeTab === "dashboard"
-                ? "bg-green-100 text-secondary font-bold"
-                : "hover:bg-gray-100"
+                ? "bg-green-200 text-secondary font-bold"
+                : "hover:bg-green-100/50"
             }`}
           >
             <FaHome />
@@ -141,8 +141,8 @@ const AdminDashboard = () => {
             onClick={() => setActiveTab("farmers")}
             className={`flex items-center gap-3 p-3 rounded cursor-pointer transition ${
               activeTab === "farmers"
-                ? "bg-green-100 text-secondary font-bold"
-                : "hover:bg-gray-100"
+                ? "bg-green-200 text-secondary font-bold"
+                : "hover:bg-green-100/50"
             }`}
           >
             <FaUser />
@@ -153,8 +153,8 @@ const AdminDashboard = () => {
             onClick={() => setActiveTab("users")}
             className={`flex items-center gap-3 p-3 rounded cursor-pointer transition ${
               activeTab === "users"
-                ? "bg-green-100 text-secondary font-bold"
-                : "hover:bg-gray-100"
+                ? "bg-green-200 text-secondary font-bold"
+                : "hover:bg-green-100/50"
             }`}>
             <FaUser />
             Users
@@ -164,8 +164,8 @@ const AdminDashboard = () => {
             onClick={() => setActiveTab("products")}
             className={`flex items-center gap-3 p-3 rounded cursor-pointer transition ${
               activeTab === "products"
-                ? "bg-green-100 text-secondary font-bold"
-                : "hover:bg-gray-100"
+                ? "bg-green-200 text-secondary font-bold"
+                : "hover:bg-green-100/50"
             }`}>
             <FaBox />
             Products
@@ -175,8 +175,8 @@ const AdminDashboard = () => {
             onClick={() => setActiveTab("orders")}
             className={`flex items-center gap-3 p-3 rounded cursor-pointer transition ${
               activeTab === "orders"
-                ? "bg-green-100 text-secondary font-bold"
-                : "hover:bg-gray-100"
+                ? "bg-green-200 text-secondary font-bold"
+                : "hover:bg-green-100/50"
             }`}>
             <FaClipboardList />
             Orders
